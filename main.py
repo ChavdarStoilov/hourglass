@@ -1,44 +1,48 @@
 import time
 import os
 
-def clear():
+def clearing():
     return os.system('cls')
 
 
 def print_board():
     for boarder in board:
         print("".join(boarder))
+
+
+def load_clock():
+    rows = -1
+
+    for row in range(len(board) -1):
+        for col in range(len(board) - 1):
+            if board[row][col] == "*" and row < 8:
+                board[row][col] = " "
+                board[rows][col] = "*"
+
+
+                clearing()
+                print_board()
+                time.sleep(0.20)
+        rows -= 1
+        
         
 
-def functionallity(number):
-    clear = 2
-    next_line = 1
-
-    add_row = -2
-    add_col = 2
-    
+def start_clock(number):
     for row in range(len(board)):
         for col in range(len(board)):
-            if row + number == 7 + number and col == 7 and row + number < len(board) - 1:
+            if row + number == 6 + number and col == 7 and row + number < len(board) -2:
                 board[row + number][col] = "*"
-            
-            if board[add_row][7] == "*":
-                if col + clear < len(board) - next_line and next_line < len(board) - 1:
-                    if board[next_line][clear] == " ":
-                        next_line += 1
-                        clear += 1
-                        add_row -= 1
-                        add_col += 1
 
-                    else:
-                        board[next_line][clear] = " "
-                        board[add_row][add_col] = "*"
-                        clear += 1
-                        add_col += 1
 
-    return add_row
+def current_places():
+
+    for row in range(len(board)):
+        for col in range(len(board)):
+            print(board[row][col])
+
 
 board = [
+    [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "],
     [" ","-","-","-","-","-","-","-","-","-","-","-","-","-"," "],
     [" ","\\","*","*","*","*","*","*","*","*","*","*","*","/"," "],
     [" "," ","\\","*","*","*","*","*","*","*","*","*","/"," "," "],
@@ -52,26 +56,69 @@ board = [
     [" "," "," ","/"," "," "," "," "," "," "," ","\\"," "," "," "],
     [" "," ","/"," "," "," "," "," "," "," "," "," ","\\"," "," "],
     [" ","/"," "," "," "," "," "," "," "," "," "," "," ","\\"," "],
-    [" ","-","-","-","-","-","-","-","-","-","-","-","-","-"," "]
+    [" ","-","-","-","-","-","-","-","-","-","-","-","-","-"," "],
+    [" "," "," "," "," "," "," "," "," "," "," "," "," "," "," "]
 
 
 ]
 
+rotated_borader = [
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '], 
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
 
-number = 0
+]
+
+
+# a = current_places()
+# print(current_places())
+
+# new_row = 0
+# new_col = 14
+# for row in range(len(rotated_borader)):
+#     for col in range(len(rotated_borader) -2, -1, -1):
+#         rotated_borader[row][col] = str(current_places())
+
+
+# print(rotated_borader)
+
+# 
+number = 1
 
 while True:
 
-    time.sleep(0.20)
-    clear()
+    time.sleep(0.40)
+    clearing()
 
     print_board()
-    test = functionallity(number)
+
+    if board[-3][7] != "*":
+        start_clock(number)
+    else:
+        load_clock()
     
-    if test == -8:
-        # TODO : Create functionallity for rotete the clock
-        
-        pass
+#     if test == -8:
+#         row = 1
+#         col = 0
+#         # TODO : Create functionallity for rotete the clock
+#         for row in range(len(board)):
+#             for col in range(len(board) -1):
+#                 board[row][col] = " "
+
+    print_board()
         
 
     number += 1
